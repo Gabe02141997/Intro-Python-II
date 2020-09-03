@@ -51,6 +51,24 @@ room['treasure'].s_to = room['narrow']
 #
 # If the user enters "q", quit the game.
 
+
+
+#set Items
+
+
+
+sword = 'Sword'
+shield = 'Shield'
+spear = 'Spear'
+master_key = 'Master Key'
+
+room['outside'].item = shield
+room['foyer'].item = spear
+room['narrow'].item = sword
+room['overlook'].item = master_key
+
+
+
 def play_game():
     current_room = room['outside']
     player_name = input('Enter your name to play:')
@@ -83,6 +101,8 @@ def play_game():
             else:
                 current_room = current_room.e_to
 
+        if command == 'i':
+            player.check_inventory()
 
     if command == 'q':
         print('Thank you for playing!! :D')

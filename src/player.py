@@ -6,3 +6,32 @@ class Player:
     def __init__(self, room, name):
         self.room = room
         self.name = name
+        self.inventory = []
+
+    def check_inventory(self):
+        print(f"{self.inventory}")
+
+    def add_item(self, item):
+        self.inventory.append(item)
+        print(f"You've added {item} to your inventory")
+
+    def remove_item(self, item):
+
+        if len(self.inventory) == 0 or item is None:
+            print("You have no items in your inventory")
+
+        else:
+            self.inventory.remove(item)
+            print(f"You have removed {item} from your inventory")
+
+
+
+# player_2 = Player('House', 'John')
+#
+# player_2.add_item('sword')
+#
+# player_2.check_inventory()
+
+# player_2.remove_item('sword')
+# player_2.check_inventory()
+
