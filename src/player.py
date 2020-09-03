@@ -3,10 +3,10 @@
 
 
 class Player:
-    def __init__(self, room, name):
+    def __init__(self, room, name, inventory=[]):
         self.room = room
         self.name = name
-        self.inventory = []
+        self.inventory = inventory
 
     def check_inventory(self):
         print(f"{self.inventory}")
@@ -26,12 +26,5 @@ class Player:
 
 
 
-# player_2 = Player('House', 'John')
-#
-# player_2.add_item('sword')
-#
-# player_2.check_inventory()
 
-# player_2.remove_item('sword')
-# player_2.check_inventory()
 

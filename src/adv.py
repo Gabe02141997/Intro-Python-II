@@ -1,20 +1,31 @@
 from room import Room
 from player import Player
+from item import Item
+
 # Declare all the rooms
+
+
+# set items
+
+item_1 = Item('Axe', 'A majestic axe crafted by the Daedra')
+item_2 = Item('Compass', 'Use this item for guidance')
+item_3 = Item('Sword', 'Use this sword to defeat the evil boss')
+item_4 = Item('Key', 'This is the boss Key, which opens the door to battle the boss')
+
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons",),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", [item_1, item_2]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""", [item_4]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", [item_3]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
@@ -33,6 +44,7 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+
 #
 # Main
 #
@@ -50,23 +62,8 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-
-
-
-#set Items
-
-
-
-sword = 'Sword'
-shield = 'Shield'
-spear = 'Spear'
-master_key = 'Master Key'
-
-room['outside'].item = shield
-room['foyer'].item = spear
-room['narrow'].item = sword
-room['overlook'].item = master_key
-
+for item in room['foyer'].items:
+    print(item.name)
 
 
 def play_game():
@@ -74,6 +71,7 @@ def play_game():
     player_name = input('Enter your name to play:')
     player = Player(current_room, player_name)
     command = ""
+
     while command != 'q':
 
         command = input(f"{player.name}!! Your current location is {current_room.name}."
@@ -81,8 +79,10 @@ def play_game():
         if command == 'n':
             if current_room.n_to is None:
                 print("you cant go there")
-            current_room = current_room.n_to
-            print(f"Your are in {current_room.name}, {current_room.description}")
+
+            else:
+                current_room = current_room.n_to
+                # print(f"Your are in {current_room.name}, {current_room.description}")
 
         if command == 'w':
             if current_room.w_to is None:
