@@ -62,8 +62,7 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-for item in room['foyer'].items:
-    print(item.name)
+
 
 
 def play_game():
@@ -84,11 +83,25 @@ def play_game():
                 current_room = current_room.n_to
                 # print(f"Your are in {current_room.name}, {current_room.description}")
 
+            if len(current_room.items) > 0:
+                current_room.reveal_items()
+                choose_item = input("What Item would you like to store?:")
+                for i in current_room.items:
+                    if choose_item == i.name:
+                            player.add_item(choose_item)
+                            break
+
+
+
+
+
+
         if command == 'w':
             if current_room.w_to is None:
                 print("You cant go there")
             else:
                 current_room = current_room.w_to
+
 
         if command == 's':
             if current_room.s_to is None:
@@ -103,6 +116,11 @@ def play_game():
 
         if command == 'i':
             player.check_inventory()
+
+        if command == 'r':
+            remove_item = input('What item would you like to remove')
+            player.remove_item(remove_item)
+
 
     if command == 'q':
         print('Thank you for playing!! :D')
